@@ -4,11 +4,8 @@ Arogya Seva is a healthcare management web application built using Flask, provid
 ## Table of Contents  
 - [Features](#features)  
 - [Technologies Used](#technologies-used)  
-- [Installation](#installation)  
 - [Usage](#usage)  
 - [Folder Structure](#folder-structure)  
-- [Future Improvements](#future-improvements)  
-- [License](#license)  
 
 ---
 
