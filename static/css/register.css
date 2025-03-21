@@ -1,0 +1,131 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Centering the form */
+body {
+    font-size: 14px;
+    background: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Form Container */
+.container {
+    background: white;
+    width: 550px;
+    padding: 25px;
+    margin: 50px auto;
+    border-top: 5px solid blue;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+/* Heading */
+.container h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Fields */
+.input-name {
+    width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Adjust spacing for inline elements */
+.input-name span {
+    display: flex;
+    gap: 10px;
+}
+
+/* Input Fields */
+.name,
+.text-name {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Label Styling */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Make Gender Buttons Appear Inline */
+.gender-options {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.radio-button {
+    margin-right: 5px;
+}
+
+/* Dropdown Styling */
+.input-name select {
+    display: inline-block;
+    font-weight: bold;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Submit Button */
+.button {
+    width: 100%;
+    padding: 12px;
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.button:hover {
+    background: darkblue;
+}
+
+/* Terms and conditions checkbox */
+.terms-container {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between checkbox and label */
+    width: fix-content;
+}
+
+.check-button {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin:0;
+    vertical-align: middle;
+}
+.terms-container label{
+    margin: 0;
+    cursor: pointer;
+}
+
+.name:hover, .text-name:hover{
+    background-color: #fafafa;
+}
+
+.text-name:focus, .name:focus{
+    border: 1px solid blue;
+}

@@ -1,0 +1,100 @@
+{% include 'header.html' %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} text-center">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endwith %}
+
+
+{% block content %}
+<div class="container-fluid py-5" style="background: linear-gradient(135deg, #72EDF2, #5151E5);">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{ url_for('static', filename='assets/img/' + doctor.image) }}" class="img-fluid rounded" alt="{{ doctor.name }}">
+        </div>
+        <div class="col-md-8">
+            <h2>{{ doctor.name }}</h2>
+            <p><strong>Specialization:</strong> {{ doctor.specialization }}</p>
+            <p><strong>Experience:</strong> {{ doctor.experience }}</p>
+            <!-- Show the Book Appointment button only if the user is logged in -->
+            {% if 'user_id' in session %}
+                <a href="{{ url_for('book_appointment', doctor_id=doctor.id) }}" class="btn btn-success">Book Appointment</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-primary">Login to Book Appointment</a>
+            {% endif %}
+            <a href="{{ url_for('doctor') }}" class="btn btn-secondary">Back to Doctors</a>
+        </div>
+
+                <!-- Patient Reviews -->
+        <div class="card shadow-lg p-4 rounded-4 bg-light mt-4">
+            <h4><i class="fas fa-star"></i> Patient Reviews</h4>
+
+            <!-- Display Existing Reviews -->
+            {% if reviews %}
+                <div class="mt-3">
+                    {% for review in reviews %}
+                        <div class="card mb-3 border-0 shadow-sm p-3">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <div>
+                                    <strong class="text-primary">{{ review.patient_name }}</strong>
+                                </div>
+                                <div>
+                                    <!-- Display star rating and numeric value -->
+                                    {% for i in range(review.rating) %}
+                                        <i class="fas fa-star text-warning"></i>
+                                    {% endfor %}
+                                    <span class="text-muted">({{ review.rating }}/5)</span>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0">{{ review.comment }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info mt-3">No reviews yet. Be the first to leave a review!</div>
+            {% endif %}
+
+
+            <!-- Add New Review Form -->
+            {% if 'user_id' in session %}
+            <form action="{{ url_for('add_review', doctor_id=doctor.id) }}" method="POST" class="mt-4 border-top pt-4">
+                <h5 class="mb-3">Leave a Review</h5>
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Your Rating</label>
+                    <select id="rating" name="rating" class="form-select" required>
+                        <option value="" selected disabled>Choose Rating</option>
+                        <option value="5">⭐️⭐️⭐️⭐️⭐️ - Excellent</option>
+                        <option value="4">⭐️⭐️⭐️⭐️ - Very Good</option>
+                        <option value="3">⭐️⭐️⭐️ - Good</option>
+                        <option value="2">⭐️⭐️ - Fair</option>
+                        <option value="1">⭐️ - Poor</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Your Comment</label>
+                    <textarea id="comment" name="comment" class="form-control" rows="3" placeholder="Share your experience..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+            </form>
+            {% else %}
+            <div class="alert alert-warning mt-4">Please <a href="{{ url_for('login') }}" class="alert-link">login</a> to leave a review.</div>
+            {% endif %}
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}
+
+{% include 'footer.html' %}

@@ -1,0 +1,58 @@
+{% include 'header.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{ url_for('static', filename='assets/img/' + doctor.image) }}" class="img-fluid rounded" alt="{{ doctor.name }}">
+        </div>
+        <div class="col-md-8">
+            <h2>{{ doctor.name }}</h2>
+            <p><strong>Specialization:</strong> {{ doctor.specialization }}</p>
+            <p><strong>Experience:</strong> {{ doctor.experience }}</p>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Appointment Booking Form -->
+            <div class="card p-4 mt-4">
+                <h4>Book an Appointment</h4>
+                <form action="{{ url_for('book_appointment', doctor_id=doctor.id) }}" method="POST">
+                    <input type="hidden" name="doctor_id" value="{{ doctor.id }}">
+
+                    <div class="mb-3">
+                        <label class="form-label">Select Date</label>
+                        <input type="date" class="form-control" name="date" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Select Time Slot</label>
+                        {% if slots|length > 0 %}
+                            <select class="form-select" name="time_slot" required>
+                                {% for slot in slots %}
+                                    <option value="{{ slot.time_slot }}">{{ slot.time_slot }}</option>
+                                {% endfor %}
+                            </select>
+                        {% else %}
+                            <div class="alert alert-warning mt-2">No slots available for this day.</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-success mt-3" {% if slots|length == 0 %}disabled{% endif %}>Confirm Appointment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% include 'footer.html' %}

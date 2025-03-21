@@ -1,0 +1,76 @@
+{% include 'header.html' %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Slot Addition Form -->
+            <div class="card shadow-lg border-0 mb-4">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Add Time Slot</h2>
+
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label class="form-label">Select Doctor</label>
+                            <select class="form-select" name="doctor_id" required>
+                                {% for doctor in doctors %}
+                                <option value="{{ doctor.id }}">{{ doctor.name }} - {{ doctor.specialization }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Date</label>
+                            <input type="date" class="form-control" name="date" min="{{ current_date }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Time Slot</label>
+                            <input type="time" class="form-control" name="time_slot" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Add Slot</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <!-- Displaying Existing Slots -->
+            <div class="card shadow-lg border-0">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Existing Slots</h3>
+                    {% if slots %}
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Doctor</th>
+                                    <th>Date</th>
+                                    <th>Time Slot</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for slot in slots %}
+                                <tr>
+                                    <td>{{ slot.doctor.name if slot.doctor else 'Unknown Doctor' }}</td>
+                                    <td>{{ slot.date }}</td>
+                                    <td>{{ slot.time_slot }}</td>
+                                    <td>
+                                        <form method="POST" action="{{ url_for('delete_slot', slot_id=slot.id) }}">
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p class="text-center text-muted">No slots available. Please add some slots.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}

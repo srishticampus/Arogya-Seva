@@ -1,0 +1,134 @@
+{% include 'header.html' %}
+
+<div class="container py-5">
+    <h2>Your Profile</h2>
+    <form action="{{ url_for('profile') }}" method="POST">
+        <div class="mb-3">
+            <label for="first_name" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ patient.first_name }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ patient.last_name }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="dob" class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" id="dob" name="dob" value="{{ patient.dob }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select class="form-select" id="gender" name="gender" required>
+                {% if patient.gender == 'Male' %}
+                    <option value="Male" selected>Male</option>
+                {% else %}
+                    <option value="Male">Male</option>
+                {% endif %}
+
+                {% if patient.gender == 'Female' %}
+                    <option value="Female" selected>Female</option>
+                {% else %}
+                    <option value="Female">Female</option>
+                {% endif %}
+
+                {% if patient.gender == 'Other' %}
+                    <option value="Other" selected>Other</option>
+                {% else %}
+                    <option value="Other">Other</option>
+                {% endif %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="blood_group" class="form-label">Blood Group</label>
+            <input type="text" class="form-control" id="blood_group" name="blood_group" value="{{ patient.blood_group }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" id="phone" name="phone" value="{{ patient.phone }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email (Read-only)</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ patient.email }}" readonly>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} mt-3" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Displaying Appointments -->
+    <div class="mt-5">
+
+        <!-- Upcoming Appointments -->
+        <h3>Upcoming Appointments</h3>
+        {% if upcoming_appointments %}
+        <table class="table table-bordered table-striped mt-3">
+            <thead class="table-primary">
+                <tr>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Time Slot</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment, doctor in upcoming_appointments %}
+                <tr>
+                    <td>{{ doctor.name }}</td>
+                    <td>{{ appointment.date }}</td>
+                    <td>{{ appointment.time_slot }}</td>
+                    <td>
+                        <form action="{{ url_for('cancel_appointment', appointment_id=appointment.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p>No upcoming appointments.</p>
+        {% endif %}
+
+        <!-- Previous Appointments -->
+        <h3>Previous Appointments</h3>
+        {% if previous_appointments %}
+        <table class="table table-bordered table-striped mt-3">
+            <thead class="table-secondary">
+                <tr>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Time Slot</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment, doctor in previous_appointments %}
+                <tr>
+                    <td>{{ doctor.name }}</td>
+                    <td>{{ appointment.date }}</td>
+                    <td>{{ appointment.time_slot }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p>No previous appointments.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% include 'footer.html' %}

@@ -1,0 +1,83 @@
+{% include 'header.html' %}
+
+<div class="container py-5">
+    <h1 class="text-center mb-4">Meet Our Doctors</h1>
+
+    <!-- Filters Section -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <input type="text" id="searchBox" class="form-control" placeholder="Search by doctor's name...">
+        </div>
+        <div class="col-md-6">
+            <select id="specializationFilter" class="form-select">
+                <option value="">All Specializations</option>
+                <option value="Cardiologist">Cardiologist</option>
+                <option value="Neurologist">Neurologist</option>
+                <option value="Orthopedic Surgeon">Orthopedic Surgeon</option>
+                <option value="Pediatrician">Pediatrician</option>
+                <option value="Dermatologist">Dermatologist</option>
+                <option value="ENT Specialist">ENT Specialist</option>
+                <option value="Psychiatrist">Psychiatrist</option>
+                <option value="Gynecologist">Gynecologist</option>
+                <option value="Oncologist">Oncologist</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Doctors List -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="doctorsList">
+        {% for doctor in doctors %}
+        <div class="col doctor-card" data-name="{{ doctor.name|lower }}" data-specialization="{{ doctor.specialization }}">
+            <div class="card shadow-lg h-100">
+                <img src="{{ url_for('static', filename='assets/img/' + doctor.image) }}" class="card-img-top" alt="{{ doctor.name }}">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ doctor.name }}</h5>
+                    <p class="card-text"><strong>{{ doctor.specialization }}</strong></p>
+                    <a href="{{ url_for('doctor_profile', doctor_id=doctor.id) }}" class="btn btn-info bg-info-subtle">View Profile</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="noResults" class="alert alert-danger text-center mt-3" style="display: none;">
+    No doctors found. Please try a different search or filter.
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const searchBox = document.getElementById("searchBox");
+    const specializationFilter = document.getElementById("specializationFilter");
+    const doctorCards = document.querySelectorAll(".doctor-card");
+    const noResultsMessage = document.getElementById("noResults");
+
+    function filterDoctors() {
+        let searchQuery = searchBox.value.toLowerCase();
+        let selectedSpecialization = specializationFilter.value.toLowerCase();
+        let hasResults = false;
+
+        doctorCards.forEach(card => {
+            let name = card.getAttribute("data-name").toLowerCase();
+            let specialization = card.getAttribute("data-specialization").toLowerCase();
+
+            let matchesSearch = name.includes(searchQuery);
+            let matchesSpecialization = selectedSpecialization === "" || specialization === selectedSpecialization;
+
+            if (matchesSearch && matchesSpecialization) {
+                card.style.display = "block";
+                hasResults = true;
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        noResultsMessage.style.display = hasResults ? "none" : "block";
+    }
+
+    searchBox.addEventListener("input", filterDoctors);
+    specializationFilter.addEventListener("change", filterDoctors);
+});
+</script>
+
+{% include 'footer.html' %}

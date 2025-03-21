@@ -1,0 +1,26 @@
+{% include 'header.html' %}
+
+<div class="container py-5">
+    <h1 class="text-center mb-5">Our Specializations</h1>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for specialization in specializations %}
+        <div class="col">
+            <div class="card shadow-lg border-0 h-100">
+                <div class="card-body text-center">
+                    <div class="icon-container mb-3">
+                        <i class="bi bi-heart-pulse text-primary" style="font-size: 3rem;"></i>
+                    </div>
+                    <h5 class="card-title">{{ specialization.name }}</h5>
+                    <p class="card-text">Expert care in {{ specialization.name }} for a healthier life.</p>
+                    <a href="{{ url_for('learn_more', specialization_id=specialization.id) }}" class="btn btn-outline-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% include 'footer.html' %}
+
+

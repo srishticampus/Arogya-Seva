@@ -1,0 +1,56 @@
+.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+}
+
+.py-3 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+}
+
+@media (min-width: 700px) {
+    .p-md-5 {
+        padding: 3rem !important;
+    }
+}
+
+#noResults {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.card-body {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+     transition: all 0.3s;
+}
+

@@ -1,0 +1,28 @@
+{% include 'header.html' %}
+
+<div class="container mt-5">
+    <h2>Add a New Doctor</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label">Doctor's Name</label>
+            <input type="text" name="name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Specialization</label>
+            <input type="text" name="specialization" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Experience</label>
+            <input type="text" name="experience" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Image File Name (Optional)</label>
+            <input type="text" name="image" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Doctor</button>
+    </form>
+
+
+</div>
+
+{% include 'footer.html' %}

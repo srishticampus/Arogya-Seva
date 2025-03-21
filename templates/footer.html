@@ -1,0 +1,92 @@
+<footer class="bg-light py-3">
+    <div class="container d-flex justify-content-between align-items-center flex-wrap">
+        <!-- Hospital Name & Address -->
+        <div class="text-muted">
+            <strong>Arogya Seva Hospital</strong> | 123 Health Street, Old City, Bombay, 456789
+        </div>
+
+        <!-- Social Media Links -->
+        <div>
+            <a href="https://www.youtube.com" target="_blank" class="btn btn-outline-dark btn-lg rounded-circle mx-1">
+                <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://www.facebook.com" target="_blank" class="btn btn-outline-dark btn-lg rounded-circle mx-1">
+                <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com" target="_blank" class="btn btn-outline-dark btn-lg rounded-circle mx-1">
+                <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://www.twitter.com" target="_blank" class="btn btn-outline-dark btn-lg rounded-circle mx-1">
+                <i class="bi bi-twitter"></i>
+            </a>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-muted">
+            &copy; 2025 Arogya Seva Hospital. All Rights Reserved.
+        </div>
+    </div>
+</footer>
+<!-- Flash Message Auto-Hide Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const alerts = document.querySelectorAll('.alert');
+
+        alerts.forEach(alert => {
+            setTimeout(() => {
+                alert.classList.add('fade-out');
+                setTimeout(() => alert.remove(), 500);
+            }, 3000);
+        });
+    });
+</script>
+<style>
+/* Flash Message Styling */
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    animation: slide-in 0.4s ease;
+}
+
+/* Different Alert Types */
+.custom-alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.custom-alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.custom-alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Slide-in Animation */
+@keyframes slide-in {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+/* Fade-out Animation */
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+</style>
+
+<!-- Bootstrap Icons CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+</body>
+</html>

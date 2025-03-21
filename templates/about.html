@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aarogya Seva</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <div class="nav_container">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+          <div class="col-md-3 mb-2 mb-md-0">
+            <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+              <h2>Aarogya Seva</h2>
+            </a>
+          </div>
+
+          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="{{ url_for('home') }}" class="nav-link px-2 link-secondary">Home</a></li>
+            <li><a href="{{ url_for('specialization') }}" class="nav-link px-2">Specialities</a></li>
+            <li><a href="{{ url_for('doctor') }}" class="nav-link px-2">Doctors</a></li>
+            <li><a href="{{ url_for('faq') }}" class="nav-link px-2">FAQs</a></li>
+            <li><a href="{{ url_for('about') }}" class="nav-link px-2">About</a></li>
+          </ul>
+
+          <div class="col-md-3 text-end">
+           <a href="{{ url_for('login') }}" class="btn btn-outline-primary me-2">Login</a>
+            <button type="button" class="btn btn-primary">Sign-up</button>
+          </div>
+        </header>
+    </div>
+
+    <div class="container py-5">
+        <div class="text-center mb-4">
+            <h1 class="display-5 fw-bold">About Arogya Seva</h1>
+            <p class="lead">Transforming Healthcare Management</p>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <p>Arogya Seva is an advanced <strong>Hospital Management System</strong> designed to streamline hospital operations and enhance patient care. Our platform ensures seamless communication between patients, doctors, and hospital administrators, making healthcare services more efficient and accessible.</p>
+                <h3 class="mt-4">Our Mission</h3>
+                <ul>
+                    <li>Simplify hospital workflows and reduce administrative burden.</li>
+                    <li>Enable easy booking of doctor appointments with available time slots.</li>
+                    <li>Provide access to doctor specializations and hospital departments.</li>
+                    <li>Enhance the overall patient experience.</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src= '{{ url_for("static", filename="assets/img/doctor.jpg") }}' alt="Healthcare" class="img-fluid rounded shadow" style="width: 100%; height: 400px; object-fit: cover;">
+            </div>
+        </div>
+
+        <h3 class="mt-5">Key Features</h3>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="card shadow p-3 mb-3">
+                    <h5>Doctor Appointment System</h5>
+                    <p>Book consultations based on doctor availability.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow p-3 mb-3">
+                    <h5>Doctor Directory</h5>
+                    <p>View all doctors, their specializations, and experience.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow p-3 mb-3">
+                    <h5>Hospital Departments</h5>
+                    <p>Access information about different hospital departments.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mt-5">Why Choose Arogya Seva?</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <p><strong>Efficiency</strong> – Reduces waiting times and improves hospital resource management.</p>
+            </div>
+            <div class="col-md-4">
+                <p><strong>Convenience</strong> – Easy appointment booking and access to medical information.</p>
+            </div>
+            <div class="col-md-4">
+                <p><strong>Scalability</strong> – Suitable for hospitals of all sizes, from clinics to large institutions.</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <h4>Join Us in Revolutionizing Healthcare!</h4>
+            <p>Arogya Seva is committed to leveraging technology to create a smarter, more efficient healthcare system.</p>
+            <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+{% include 'footer.html' %}
+
